@@ -10,3 +10,9 @@ container.appendChild(square);
 }
 
 let boxes = document.querySelectorAll(".box");
+boxes.forEach((div) => {
+    div.addEventListener("mouseover", () => {
+     div.classList.add("hover");
+    });
+});
+
