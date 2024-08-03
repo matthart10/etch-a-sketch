@@ -13,11 +13,11 @@ startButton.addEventListener("click", startPrompt);
 let optionButtonContainer = document.createElement("div");
 container.appendChild(optionButtonContainer);
 
-// Create Clear Grid button
-let clearGridButton = document.createElement("button");
-clearGridButton.id = "optionBtns"
-clearGridButton.textContent = "Clear Grid";
-optionButtonContainer.appendChild(clearGridButton);
+// Create Reset Grid button
+let resetGridButton = document.createElement("button");
+resetGridButton.id = "optionBtns"
+resetGridButton.textContent = "Reset Grid";
+optionButtonContainer.appendChild(resetGridButton);
 
 // Create Rainbow Color button
 let rainbowColorButton = document.createElement("button");
@@ -83,9 +83,12 @@ function makeGrid(numberOfRowsAndColumns, widthAndHeight) {
                         div.style.backgroundColor = getRandomColor();
                     });
                 });
-                clearGridButton.addEventListener("click", () => {
+                resetGridButton.addEventListener("click", () => {
                         div.style.opacity = 1;
-                        div.style.backgroundColor = clearGrid();
+                        div.style.backgroundColor = resetGrid();
+                        div.addEventListener("mouseover", () => {
+                            div.style.backgroundColor = "red";
+                        });
                 });
             });
 }
@@ -100,7 +103,7 @@ function getRandomColor() {
 }
 
 
-function clearGrid() {
+function resetGrid() {
     var color = "#FFFFFF"
     return color;
 }
