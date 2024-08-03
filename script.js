@@ -38,8 +38,14 @@ function makeGrid(numberOfRowsAndColumns, widthAndHeight) {
         }
         let cells = document.querySelectorAll(".box");
         cells.forEach((div) => {
+            div.style.opacity = 0;
             div.addEventListener("mouseover", () => {
-             div.style.backgroundColor = getRandomColor();
+             div.style.backgroundColor = "red";
+             let currentOpacity = parseFloat(div.style.opacity);
+            if (currentOpacity <= 0.9) {
+            let newOpacity = currentOpacity + 0.1;
+            div.style.opacity = newOpacity;
+            }
             });
         });
 }
@@ -51,4 +57,10 @@ function getRandomColor() {
         color += letters[Math.floor(Math.random() * 16)]
     }
     return color;
+}
+
+function increaseOpacity() {
+    let currentOpacity = parseFloat(e.style.opacity);
+    let newOpacity = currentOpacity + 0.1;
+    e.style.opacity = newOpacity;
 }
