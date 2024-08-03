@@ -61,8 +61,12 @@ function makeGrid(numberOfRowsAndColumns, widthAndHeight) {
         
         let cells = document.querySelectorAll(".box");
         cells.forEach((div) => {
-            // div.style.opacity = 0;
+            div.addEventListener("mouseover", () => {
+                div.style.backgroundColor = "red";
+            });
                 increaseOpacityButton.addEventListener("click", () => {
+                    div.style.backGroundColor = "#FFFFFF";
+                    div.style.opacity = 0;
                     div.addEventListener("mouseover", () => {
                         div.style.backgroundColor = "red";
                         let currentOpacity = parseFloat(div.style.opacity);
@@ -73,8 +77,9 @@ function makeGrid(numberOfRowsAndColumns, widthAndHeight) {
                     });
                 });
                 rainbowColorButton.addEventListener("click", () => {
+                    div.style.backgroundColor = "#FFFFFF";
+                    div.style.opacity = 1;
                     div.addEventListener("mouseover", () => {
-                        // div.style.opacity = 1;
                         div.style.backgroundColor = getRandomColor();
                     });
                 });
