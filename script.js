@@ -9,6 +9,28 @@ startButton.textContent = "Click to choose size grid";
 container.appendChild(startButton);
 startButton.addEventListener("click", startPrompt);
 
+// Create container for option buttons
+let optionButtonContainer = document.createElement("div");
+container.appendChild(optionButtonContainer);
+
+// Create Clear Grid button
+let clearGridButton = document.createElement("button");
+clearGridButton.id = "optionBtns"
+clearGridButton.textContent = "Clear Grid";
+optionButtonContainer.appendChild(clearGridButton);
+
+// Create Rainbow Color button
+let rainbowColorButton = document.createElement("button");
+rainbowColorButton.id = "optionBtns"
+rainbowColorButton.textContent = "Rainbow Color";
+optionButtonContainer.appendChild(rainbowColorButton);
+
+// Create Opacity Increase button
+let increaseOpacityButton = document.createElement("button");
+increaseOpacityButton.id = "optionBtns"
+increaseOpacityButton.textContent = "Opacity Increase Option";
+optionButtonContainer.appendChild(increaseOpacityButton);
+
 // Create grid
 let grid = document.createElement("div");
 grid.style.cssText = "min-height: 500px; min-width: 500px; max-width: 500px; display: flex; flex-wrap: wrap; border-style: solid; border-color: black";
@@ -36,18 +58,31 @@ function makeGrid(numberOfRowsAndColumns, widthAndHeight) {
         cell.style.height = widthAndHeight + "px";
         grid.appendChild(cell);
         }
+        
         let cells = document.querySelectorAll(".box");
         cells.forEach((div) => {
-            div.style.opacity = 0;
-            div.addEventListener("mouseover", () => {
-             div.style.backgroundColor = "red";
-             let currentOpacity = parseFloat(div.style.opacity);
-            if (currentOpacity <= 0.9) {
-            let newOpacity = currentOpacity + 0.1;
-            div.style.opacity = newOpacity;
-            }
+            // div.style.opacity = 0;
+                increaseOpacityButton.addEventListener("click", () => {
+                    div.addEventListener("mouseover", () => {
+                        div.style.backgroundColor = "red";
+                        let currentOpacity = parseFloat(div.style.opacity);
+                        if (currentOpacity <= 0.9) {
+                            let newOpacity = currentOpacity + 0.1;
+                            div.style.opacity = newOpacity;
+                        };
+                    });
+                });
+                rainbowColorButton.addEventListener("click", () => {
+                    div.addEventListener("mouseover", () => {
+                        // div.style.opacity = 1;
+                        div.style.backgroundColor = getRandomColor();
+                    });
+                });
+                clearGridButton.addEventListener("click", () => {
+                        div.style.opacity = 1;
+                        div.style.backgroundColor = clearGrid();
+                });
             });
-        });
 }
 
 function getRandomColor() {
@@ -56,6 +91,12 @@ function getRandomColor() {
     for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)]
     }
+    return color;
+}
+
+
+function clearGrid() {
+    var color = "#FFFFFF"
     return color;
 }
 
