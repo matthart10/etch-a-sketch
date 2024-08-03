@@ -1,43 +1,54 @@
+// Apply styles to container holding button and grid
 let container = document.querySelector("#container");
+container.style.cssText = "display: flex; flex-direction: column; justify-content: center; align-items: center";
+
+// Create start button
 let startButton = document.createElement("button");
 startButton.id = "btn"
 startButton.textContent = "Click to choose size grid";
 container.appendChild(startButton);
 startButton.addEventListener("click", startPrompt);
-var gridSize = 0;
 
+// Create grid
+let grid = document.createElement("div");
+grid.style.cssText = "min-height: 500px; min-width: 500px; max-width: 500px; display: flex; flex-wrap: wrap; border-style: solid; border-color: black";
+container.appendChild(grid);
 
-let smallContainer = document.createElement("div");
-smallContainer.style.cssText = "min-width: 960px; max-width: 960px; display: flex; flex-wrap: wrap;";
-container.appendChild(smallContainer);
-
+var numberOfRowsAndColumns = 0;
 function startPrompt() {
-    gridSize = prompt("What size grid do you want?");
-    while ((isNaN(gridSize)) || (gridSize > 100)) {
+    numberOfRowsAndColumns = prompt("What size grid do you want?");
+    while ((isNaN(numberOfRowsAndColumns)) || (numberOfRowsAndColumns > 100)) {
         alert("Not a number or number is too large. Try again.");
-        gridSize = prompt("What size grid do you want?");
+        numberOfRowsAndColumns = prompt("What size grid do you want?");
     }
-    let adjustedSize = 960 / gridSize;
+    let widthAndHeight = 500 / numberOfRowsAndColumns;
 
-    makeGrid(gridSize, adjustedSize);
+    makeGrid(numberOfRowsAndColumns, widthAndHeight);
 }
 
-
-
-function makeGrid(number1, number2) {
-    smallContainer.textContent = '';
-    for (let i=0; i < (number1 * number1); i++) {
-        const square = document.createElement("div");
-        square.classList.add("box");
-        square.style.boxSizing = "border-box";
-        square.style.width = number2 + "px";
-        square.style.height = number2 + "px";
-        smallContainer.appendChild(square);
+function makeGrid(numberOfRowsAndColumns, widthAndHeight) {
+    grid.textContent = '';
+    for (let i=0; i < (numberOfRowsAndColumns * numberOfRowsAndColumns); i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("box");
+        cell.style.boxSizing = "border-box";
+        cell.style.width = widthAndHeight + "px";
+        cell.style.height = widthAndHeight + "px";
+        grid.appendChild(cell);
         }
-        let boxes = document.querySelectorAll(".box");
-        boxes.forEach((div) => {
+        let cells = document.querySelectorAll(".box");
+        cells.forEach((div) => {
             div.addEventListener("mouseover", () => {
-             div.classList.add("hover");
+             div.style.backgroundColor = getRandomColor();
             });
         });
+}
+
+function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)]
+    }
+    return color;
 }
