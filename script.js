@@ -65,7 +65,7 @@ function makeGrid(numberOfRowsAndColumns, widthAndHeight) {
                 div.style.backgroundColor = "red";
             });
                 increaseOpacityButton.addEventListener("click", () => {
-                    div.style.backGroundColor = "#FFFFFF";
+                    div.style.backgroundColor = "#FFFFFF";
                     div.style.opacity = 0;
                     div.addEventListener("mouseover", () => {
                         div.style.backgroundColor = "red";
